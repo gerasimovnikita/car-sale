@@ -1,0 +1,75 @@
+
+
+version: '1'
+services:
+  app:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    depends_on:
+      - logstash
+    volumes:
+      - ./volumes/nginx/nginx.conf:/etc/nginx/nginx.conf
+
+  logstash:
+    container_name: logstash
+    image: opensearchproject/logstash-oss-with-opensearch-output-plugin:latest
+    depends_on:
+      - kafka
+      - elasticsearch
+    ports:
+      - "5044:5044"
+      - "1111:1111"
+    environment:
+      BOOTSTRAP_SERVERS: "kafka:9092"
+    volumes:
+      - ./volumes/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+
+  kafka:
+    image: bitnami/kafka:latest
+    ports:
+      - '9092:9092'
+    environment:
+      # Во внутренней сети docker-compose слушаем адрес kafka:9092
+      # Из внешней сети docker-compose будем слушать localhost:9094
+      # Как альтерантива, можно вычислять адрес как-то так:
+      # HOSTNAME_COMMAND: curl http://169.254.169.254/latest/meta-data/public-hostname
+      - KAFKA_BROKER_ID=1
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://0.0.0.0:9092,OUTSIDE://0.0.0.0:9094
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,OUTSIDE://localhost:9094
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,OUTSIDE:PLAINTEXT
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+      - ALLOW_PLAINTEXT_LISTENER=yes
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+    container_name: elasticsearch
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - esnet
+
+  kibana:
+    image: 'docker.elastic.co/kibana/kibana:6.4.2'
+    container_name: kibana
+    environment:
+      SERVER_NAME: kibana.local
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    ports:
+      - '5601:5601'
+    networks:
+      - esnet
+
+volumes:
+  esdata:
+    driver: local
+
+networks:
+  esnet:

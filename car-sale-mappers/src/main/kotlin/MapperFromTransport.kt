@@ -1,5 +1,4 @@
-import com.github.gerasimovnikita.otus.`car-sale`.api.v1.models.AdCreateObject
-import com.github.gerasimovnikita.otus.car.*
+import com.github.gerasimovnikita.otus.carsale.api.v1.models.*
 import exceptions.UnknownRequestClass
 import models.*
 import stubs.CarSaleStubs

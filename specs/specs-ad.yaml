@@ -371,7 +371,6 @@ components:
         - delete
         - makeVisiblePublic
         - makeVisibleOwn
-        - makeVisibleGroup
 
     AdResponseSingle:
       allOf:

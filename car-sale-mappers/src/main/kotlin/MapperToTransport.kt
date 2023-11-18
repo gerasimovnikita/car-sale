@@ -17,6 +17,12 @@ private fun CarSaleState.getResult(): ResponseResult{
     else return ResponseResult.ERROR
 }
 
+fun  CarSaleContext.toTransportInit() = AdInitResponse(
+    requestId =this.requestID.asString().takeIf { it.isNotBlank() },
+    result = if (errors.isEmpty()) ResponseResult.SUCCESS else ResponseResult.ERROR,
+    errors = errors.toTransportErrors()
+)
+
 fun CarSaleContext.toTransportCreate() = AdCreateResponse(
     responseType = "create",
     requestId = this.requestID.asString().takeIf { it.isNotBlank() },

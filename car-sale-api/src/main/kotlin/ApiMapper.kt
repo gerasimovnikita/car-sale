@@ -12,14 +12,14 @@ val apiMapper = JsonMapper.builder().run {
     build()
 }
 
-fun apiV1RequestSerialize(request: IRequest): String = apiMapper.writeValueAsString(request)
+fun apiRequestSerialize(request: IRequest): String = apiMapper.writeValueAsString(request)
 
 @Suppress("UNCHECKED_CAST")
-fun <T : IRequest> apiV1RequestDeserialize(json: String): T =
+fun <T : IRequest> apiRequestDeserialize(json: String): T =
     apiMapper.readValue(json, IRequest::class.java) as T
 
-fun apiV1ResponseSerialize(response: IResponse): String = apiMapper.writeValueAsString(response)
+fun apiResponseSerialize(response: IResponse): String = apiMapper.writeValueAsString(response)
 
 @Suppress("UNCHECKED_CAST")
-fun <T : IResponse> apiV1ResponseDeserialize(json: String): T =
+fun <T : IResponse> apiResponseDeserialize(json: String): T =
     apiMapper.readValue(json, IResponse::class.java) as T

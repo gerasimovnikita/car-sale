@@ -4,7 +4,7 @@ import com.github.gerasimovnikita.otus.carsale.biz.CarSaleAdProcessor
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
 
-fun Route.v1Ad(processor: CarSaleAdProcessor){
+fun Route.CarSaleAd(processor: CarSaleAdProcessor){
     route("car-sale-ad"){
         post("create") {
             call.createCarSaleAd(processor)

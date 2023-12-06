@@ -44,6 +44,7 @@ dependencies {
     implementation(ktor("cors")) // "io.ktor:ktor-cors:$ktorVersion"
     implementation(ktor("auto-head-response"))
 
+    implementation("io.ktor:ktor-server-websockets-jvm:2.2.4")
     implementation(ktor("websockets")) // "io.ktor:ktor-websockets:$ktorVersion"
     implementation(ktor("auth")) // "io.ktor:ktor-auth:$ktorVersion"
     implementation(ktor("auth-jwt")) // "io.ktor:ktor-auth-jwt:$ktorVersion"
@@ -59,4 +60,7 @@ dependencies {
 
     testImplementation(kotlin("test-junit"))
     implementation(ktor("test-host"))
+
+    testImplementation(ktor("websockets"))
+    testImplementation(ktor("content-negotiation", prefix = "client-")) // io.ktor:ktor-server-content-negotiation
 }

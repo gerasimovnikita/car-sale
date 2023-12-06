@@ -7,6 +7,7 @@ include("car-sale-mappers")
 include("car-sale-biz")
 include("car-sale-stubs")
 include("car-sale-app-ktor")
+include("car-sale-lib-cor")
 
 pluginManagement {
     val kotlinVersion: String by settings

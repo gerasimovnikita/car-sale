@@ -5,9 +5,10 @@ enum class CarSaleStubs {
     SUCCESS,
     NOT_FOUND,
     BAD_ID,
-    BAD_TITLE,
+    BAD_CAR_NAME,
     BAD_DESCRIPTION,
     BAD_VISIBILITY,
     CANNOT_DELETE,
-    BAD_SEARCH_STRING
+    BAD_SEARCH_STRING,
+    DB_ERROR
 }

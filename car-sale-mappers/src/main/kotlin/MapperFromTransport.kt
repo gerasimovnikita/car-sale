@@ -28,7 +28,7 @@ private fun AdDebug?.transportToStubCase(): CarSaleStubs = when(this?.stub){
     AdRequestDebugStubs.SUCCESS -> CarSaleStubs.SUCCESS
     AdRequestDebugStubs.NOT_FOUND -> CarSaleStubs.NOT_FOUND
     AdRequestDebugStubs.BAD_ID -> CarSaleStubs.BAD_ID
-    AdRequestDebugStubs.BAD_TITLE -> CarSaleStubs.BAD_TITLE
+    AdRequestDebugStubs.BAD_TITLE -> CarSaleStubs.BAD_CAR_NAME
     AdRequestDebugStubs.BAD_DESCRIPTION -> CarSaleStubs.BAD_DESCRIPTION
     AdRequestDebugStubs.BAD_VISIBILITY -> CarSaleStubs.BAD_VISIBILITY
     AdRequestDebugStubs.CANNOT_DELETE -> CarSaleStubs.CANNOT_DELETE

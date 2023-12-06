@@ -2,6 +2,7 @@ package helpers
 
 import CarSaleContext
 import models.CarSaleError
+import models.CarSaleState
 
 fun Throwable.asCarSaleError(
     code: String = "unknown",
@@ -16,3 +17,8 @@ fun Throwable.asCarSaleError(
 )
 
 fun CarSaleContext.addError(vararg error: CarSaleError)= errors.addAll(error)
+
+fun CarSaleContext.fail(error: CarSaleError){
+    addError(error)
+    state = CarSaleState.FAILING
+}

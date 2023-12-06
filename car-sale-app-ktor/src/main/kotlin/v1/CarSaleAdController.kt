@@ -8,6 +8,10 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import toTransportCreate
+import toTransportDelete
+import toTransportRead
+import toTransportSearch
+import toTransportUpdate
 
 suspend fun ApplicationCall.createCarSaleAd(processor: CarSaleAdProcessor){
     val request = receive<AdCreateRequest>()
@@ -22,7 +26,7 @@ suspend fun ApplicationCall.readCarSaleAd(processor: CarSaleAdProcessor){
     val context = CarSaleContext()
     context.fromTransport(request)
     processor.exec(context)
-    respond(context.toTransportCreate())
+    respond(context.toTransportRead())
 }
 
 suspend fun ApplicationCall.updateCarSaleAd(processor: CarSaleAdProcessor){
@@ -30,7 +34,7 @@ suspend fun ApplicationCall.updateCarSaleAd(processor: CarSaleAdProcessor){
     val context = CarSaleContext()
     context.fromTransport(request)
     processor.exec(context)
-    respond(context.toTransportCreate())
+    respond(context.toTransportUpdate())
 }
 
 suspend fun ApplicationCall.deleteCarSaleAd(processor: CarSaleAdProcessor){
@@ -38,7 +42,7 @@ suspend fun ApplicationCall.deleteCarSaleAd(processor: CarSaleAdProcessor){
     val context = CarSaleContext()
     context.fromTransport(request)
     processor.exec(context)
-    respond(context.toTransportCreate())
+    respond(context.toTransportDelete())
 }
 
 suspend fun ApplicationCall.searchCarSaleAd(processor: CarSaleAdProcessor){
@@ -46,5 +50,5 @@ suspend fun ApplicationCall.searchCarSaleAd(processor: CarSaleAdProcessor){
     val context = CarSaleContext()
     context.fromTransport(request)
     processor.exec(context)
-    respond(context.toTransportCreate())
+    respond(context.toTransportSearch())
 }

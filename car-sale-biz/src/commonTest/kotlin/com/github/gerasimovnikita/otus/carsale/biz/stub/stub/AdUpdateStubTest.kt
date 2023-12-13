@@ -1,4 +1,4 @@
-package com.github.gerasimovnikita.otus.carsale.biz.stub
+package com.github.gerasimovnikita.otus.carsale.biz.stub.stub
 
 import CarSaleContext
 import com.github.gerasimovnikita.otus.carsale.biz.CarSaleAdProcessor

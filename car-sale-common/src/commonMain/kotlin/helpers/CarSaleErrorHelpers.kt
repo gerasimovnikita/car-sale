@@ -22,3 +22,16 @@ fun CarSaleContext.fail(error: CarSaleError){
     addError(error)
     state = CarSaleState.FAILING
 }
+
+fun errorValidation(
+    field: String,
+    violationCode: String,
+    description: String,
+    level: CarSaleError.Level = CarSaleError.Level.ERROR,
+) = CarSaleError(
+    code = "validation-$field-$violationCode",
+    field = field,
+    group = "validation",
+    message = "Validation error for field $field: $description",
+    level = level,
+)

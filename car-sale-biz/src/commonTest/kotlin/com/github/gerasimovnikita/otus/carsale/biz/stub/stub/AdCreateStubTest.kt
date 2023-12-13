@@ -1,4 +1,4 @@
-package ru.otus.otuskotlin.marketplace.biz.stub
+package com.github.gerasimovnikita.otus.carsale.biz.stub.stub
 
 import CarSaleAdStub
 import CarSaleContext

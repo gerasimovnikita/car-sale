@@ -36,5 +36,24 @@ kotlin {
                 implementation(kotlin("test-junit"))
             }
         }
+
+        @Suppress("UNUSED_VARIABLE")
+        val jsMain by getting {
+            dependencies {
+                implementation(kotlin("stdlib-js"))
+            }
+        }
+        @Suppress("UNUSED_VARIABLE")
+        val jsTest by getting {
+            dependencies {
+                implementation(kotlin("test-js"))
+            }
+        }
+        @Suppress("UNUSED_VARIABLE")
+        val jvmMain by getting {
+            dependencies {
+                implementation(kotlin("stdlib-jdk8"))
+            }
+        }
     }
 }

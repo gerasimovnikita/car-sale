@@ -15,6 +15,8 @@ object CarSaleAdStub {
         carSaleActiveAd("666", filter, status)
     )
 
+    fun prepareResult(block: CarSaleAd.() -> Unit): CarSaleAd = get().apply(block)
+
     private fun carSaleActiveAd(id: String, filter: String, status: CarSaleAdStatus) =
         carSaleAd(AD_ACTIVE_BOLT1, id = id, filter = filter, status = status)
 

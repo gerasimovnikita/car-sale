@@ -3,5 +3,6 @@ package models
 enum class CarSaleState {
     NONE,
     RUNNING,
-    FAILING
+    FAILING,
+    FINISHING
 }

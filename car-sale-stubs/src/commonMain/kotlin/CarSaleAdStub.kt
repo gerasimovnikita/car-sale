@@ -15,6 +15,15 @@ object CarSaleAdStub {
         carSaleActiveAd("666", filter, status)
     )
 
+    fun prepareOffersList(filter: String, status: CarSaleAdStatus) = listOf(
+        carSaleActiveAd("111", filter, status),
+        carSaleActiveAd("222", filter, status),
+        carSaleActiveAd("333", filter, status),
+        carSaleActiveAd("444", filter, status),
+        carSaleActiveAd("555", filter, status),
+        carSaleActiveAd("666", filter, status)
+    )
+
     fun prepareResult(block: CarSaleAd.() -> Unit): CarSaleAd = get().apply(block)
 
     private fun carSaleActiveAd(id: String, filter: String, status: CarSaleAdStatus) =

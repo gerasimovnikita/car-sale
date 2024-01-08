@@ -11,4 +11,8 @@ data class CarSaleAd(
     var visibility: CarSaleAdVisibility = CarSaleAdVisibility.NONE,
     var carId: CarSaleCarId = CarSaleCarId.NONE,
     val permissionClient: MutableSet<CarSaleAdPermissionClient> = mutableSetOf()
-)
+){
+    fun deepCopy(): CarSaleAd = copy(
+        permissionClient = permissionClient.toMutableSet()
+    )
+}

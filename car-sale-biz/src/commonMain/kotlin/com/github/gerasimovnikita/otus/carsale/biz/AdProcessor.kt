@@ -1,6 +1,7 @@
 package com.github.gerasimovnikita.otus.carsale.biz
 
 import CarSaleContext
+import CarSaleCorSettings
 import car.sale.cor.rootChain
 import car.sale.cor.worker
 import com.github.gerasimovnikita.otus.carsale.biz.groups.operation
@@ -9,8 +10,8 @@ import com.github.gerasimovnikita.otus.carsale.biz.validation.*
 import com.github.gerasimovnikita.otus.carsale.biz.workers.*
 import models.*
 
-class CarSaleAdProcessor {
-    suspend fun exec(ctx: CarSaleContext) = BusinessChain.exec(ctx)
+class CarSaleAdProcessor(val settings: CarSaleCorSettings = CarSaleCorSettings()) {
+    suspend fun exec(ctx: CarSaleContext) = BusinessChain.exec(ctx.apply{this.settings = this@CarSaleAdProcessor.settings})
 
     companion object {
         private val BusinessChain = rootChain<CarSaleContext> {

@@ -1,9 +1,11 @@
 package com.github.gerasimovnikita.otus.carsale.app.ktor
 
 import carsale.marketplace.api.apiMapper
+import com.github.gerasimovnikita.otus.carsale.app.ktor.plugins.initAppSettings
+import com.github.gerasimovnikita.otus.carsale.app.ktor.plugins.initPlugins
 import com.github.gerasimovnikita.otus.carsale.app.ktor.v1.CarSaleAd
-import com.github.gerasimovnikita.otus.carsale.app.ktor.v1.wsHandler
-import com.github.gerasimovnikita.otus.carsale.biz.CarSaleAdProcessor
+import com.github.gerasimovnikita.otus.carsale.app.ktor.v1.WsHandler
+import com.github.gersimovnikita.otus.carsale.app.common.CarSaleAppSettings
 import io.ktor.http.*
 import io.ktor.serialization.jackson.*
 import io.ktor.server.application.*
@@ -23,8 +25,9 @@ import org.slf4j.event.Level
 
 fun main(args: Array<String>) = EngineMain.main(args)
 
-fun Application.module() {
-    val processor = CarSaleAdProcessor()
+fun Application.module(appSettings: CarSaleAppSettings = initAppSettings()) {
+    initPlugins(appSettings)
+    val handler = WsHandler()
 
     install(CachingHeaders)
     install(DefaultHeaders)
@@ -61,11 +64,11 @@ fun Application.module() {
                 }
             }
 
-            CarSaleAd(processor)
+            CarSaleAd(appSettings)
         }
 
         webSocket("/ws/v1"){
-            wsHandler(processor)
+            handler.handle(this, appSettings)
         }
 
         static("static"){

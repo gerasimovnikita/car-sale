@@ -58,9 +58,14 @@ dependencies {
     implementation(project(":car-sale-biz"))
     implementation(project(":car-sale-stubs"))
 
+    implementation(project(":car-sale-repo-in-memory"))
+    implementation(project(":car-sale-repo-stubs"))
+
     testImplementation(kotlin("test-junit"))
     implementation(ktor("test-host"))
 
     testImplementation(ktor("websockets"))
     testImplementation(ktor("content-negotiation", prefix = "client-")) // io.ktor:ktor-server-content-negotiation
+    testImplementation(project(":car-sale-repo-in-memory"))
+    testImplementation(project(":car-sale-repo-stubs"))
 }

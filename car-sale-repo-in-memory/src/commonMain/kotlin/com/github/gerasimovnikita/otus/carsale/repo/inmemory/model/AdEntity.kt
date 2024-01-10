@@ -1,9 +1,6 @@
 package com.github.gerasimovnikita.otus.carsale.repo.inmemory.model
 
-import models.CarSaleAd
-import models.CarSaleAdId
-import models.CarSaleAdVisibility
-import models.CarSaleUserId
+import models.*
 
 data class AdEntity(
     val id: String? = null,
@@ -11,6 +8,7 @@ data class AdEntity(
     val description: String? = null,
     val ownerId: String? = null,
     val visibility: String? = null,
+    val lock: String? = null,
 ) {
     constructor(model: CarSaleAd): this(
         id = model.id.asString().takeIf { it.isNotBlank() },
@@ -18,6 +16,7 @@ data class AdEntity(
         description = model.description.takeIf { it.isNotBlank() },
         ownerId = model.ownerId.asString().takeIf { it.isNotBlank() },
         visibility = model.visibility.takeIf { it != CarSaleAdVisibility.NONE }?.name,
+        lock = model.lock.asString().takeIf { it.isNotBlank() }
     )
 
     fun toInternal() = CarSaleAd(
@@ -26,5 +25,6 @@ data class AdEntity(
         description = description?: "",
         ownerId = ownerId?.let { CarSaleUserId(it) }?: CarSaleUserId.NONE,
         visibility = visibility?.let { CarSaleAdVisibility.valueOf(it) }?: CarSaleAdVisibility.NONE,
+        lock = lock?.let { CarSaleAdLock(it) } ?: CarSaleAdLock.NONE
     )
 }

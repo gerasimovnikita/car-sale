@@ -17,6 +17,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
+                implementation(project(":car-sale-lib-logging-common"))
 
                 api("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
             }
@@ -24,6 +25,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
+                implementation(project(":car-sale-lib-logging-common"))
                 implementation(kotlin("test-annotations-common"))
             }
         }

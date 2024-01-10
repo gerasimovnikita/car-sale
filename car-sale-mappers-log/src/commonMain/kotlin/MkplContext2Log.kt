@@ -1,11 +1,11 @@
-import com.github.gerasimovnikita.otus.car.*
+import com.github.gerasimovnikita.otus.carsale.api.log.models.*
 import kotlinx.datetime.Clock
 import models.*
 
 fun CarSaleContext.toLog(logId: String) = CommonLogModel(
     messageTime = Clock.System.now().toString(),
     logId = logId,
-    source = "ok-marketplace",
+    source = "car-sale",
     ad = toMkplLog(),
     errors = errors.map { it.toLog() },
 )

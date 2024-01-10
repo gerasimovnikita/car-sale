@@ -2,10 +2,13 @@ package com.github.gerasimovnikita.otus.carsale.biz
 
 import CarSaleContext
 import CarSaleCorSettings
+import car.sale.cor.chain
 import car.sale.cor.rootChain
 import car.sale.cor.worker
 import com.github.gerasimovnikita.otus.carsale.biz.groups.operation
 import com.github.gerasimovnikita.otus.carsale.biz.groups.stubs
+import com.github.gerasimovnikita.otus.carsale.biz.repo.repoPrepareUpdate
+import com.github.gerasimovnikita.otus.carsale.biz.repo.repoUpdate
 import com.github.gerasimovnikita.otus.carsale.biz.validation.*
 import com.github.gerasimovnikita.otus.carsale.biz.workers.*
 import models.*
@@ -68,15 +71,24 @@ class CarSaleAdProcessor(val settings: CarSaleCorSettings = CarSaleCorSettings()
                 validation {
                     worker("Копируем поля в adValidating") { carSaleAdValidating = carSaleRequest.deepCopy() }
                     worker("Очистка id") { carSaleAdValidating.id = CarSaleAdId(carSaleAdValidating.id.asString().trim()) }
+                    worker("Очистка lock") { carSaleAdValidating.lock = CarSaleAdLock(carSaleAdValidating.lock.asString().trim()) }
                     worker("Очистка заголовка") { carSaleAdValidating.carName = carSaleAdValidating.carName.trim() }
                     worker("Очистка описания") { carSaleAdValidating.description = carSaleAdValidating.description.trim() }
                     validateIdNotEmpty("Проверка на непустой id")
                     validateIdProperFormat("Проверка формата id")
+                    validateLockNotEmpty("Проверка на непустой lock")
+                    validateLockProperFormat("Проверка формата lock")
                     validateTitleNotEmpty("Проверка на непустой заголовок")
                     validateTitleHasContent("Проверка на наличие содержания в заголовке")
                     validateDescriptionNotEmpty("Проверка на непустое описание")
                     validateDescriptionHasContent("Проверка на наличие содержания в описании")
                     finishAdValidation("Успешное завершение процедуры валидации")
+                    chain {
+                        title = "Логика сохранения"
+//                        repoRead("Чтение объявления из БД")
+                        repoPrepareUpdate("Подготовка объекта для обновления")
+                        repoUpdate("Обновление объявления в БД")
+                    }
                 }
             }
 
@@ -91,8 +103,11 @@ class CarSaleAdProcessor(val settings: CarSaleCorSettings = CarSaleCorSettings()
                     worker("Копируем поля в adValidating") {
                         carSaleAdValidating = carSaleRequest.deepCopy() }
                     worker("Очистка id") { carSaleAdValidating.id = CarSaleAdId(carSaleAdValidating.id.asString().trim()) }
+                    worker("Очистка lock") { carSaleAdValidating.lock = CarSaleAdLock(carSaleAdValidating.lock.asString().trim()) }
                     validateIdNotEmpty("Проверка на непустой id")
                     validateIdProperFormat("Проверка формата id")
+                    validateLockNotEmpty("Проверка на непустой lock")
+                    validateLockProperFormat("Проверка формата lock")
                     finishAdValidation("Успешное завершение процедуры валидации")
                 }
             }

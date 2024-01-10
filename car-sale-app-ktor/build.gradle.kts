@@ -57,8 +57,12 @@ dependencies {
     implementation(project(":car-sale-common"))
     implementation(project(":car-sale-biz"))
     implementation(project(":car-sale-stubs"))
+    implementation(project(":car-sale-app-common"))
 
     implementation(project(":car-sale-repo-in-memory"))
+    implementation(project(":car-sale-lib-logging-common"))
+    implementation(project(":car-sale-lib-logging-kermit"))
+    implementation(project(":car-sale-lib-logging-logback"))
     implementation(project(":car-sale-repo-stubs"))
 
     testImplementation(kotlin("test-junit"))

@@ -10,9 +10,13 @@ data class CarSaleAd(
     var adStatus: CarSaleAdStatus = CarSaleAdStatus.NONE,
     var visibility: CarSaleAdVisibility = CarSaleAdVisibility.NONE,
     var carId: CarSaleCarId = CarSaleCarId.NONE,
+    var lock: CarSaleAdLock = CarSaleAdLock.NONE,
     val permissionClient: MutableSet<CarSaleAdPermissionClient> = mutableSetOf()
 ){
     fun deepCopy(): CarSaleAd = copy(
         permissionClient = permissionClient.toMutableSet()
     )
+    companion object {
+        val NONE = CarSaleAd()
+    }
 }

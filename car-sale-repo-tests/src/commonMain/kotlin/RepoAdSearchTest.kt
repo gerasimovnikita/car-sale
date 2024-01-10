@@ -20,7 +20,7 @@ abstract class RepoAdSearchTest {
     fun searchOwner() = runRepoTest {
         val result = repo.searchAd(DbAdFilterRequest(ownerId = searchOwnerId))
         assertEquals(true, result.isSuccess)
-        val expected = listOf(initializedObjects[1], initializedObjects[2Lj]).sortedBy { it.id.asString() }
+        val expected = listOf(initializedObjects[1], initializedObjects[2]).sortedBy { it.id.asString() }
         assertEquals(expected, result.data?.sortedBy { it.id.asString() })
         assertEquals(emptyList(), result.errors)
     }

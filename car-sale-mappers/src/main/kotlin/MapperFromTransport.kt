@@ -15,6 +15,7 @@ fun CarSaleContext.fromTransport(request: IRequest) = when(request) {
 
 private fun String?.toAdId() = this?.let { CarSaleAdId(it) } ?: CarSaleAdId.NONE
 private fun String?.toAdWithId() = CarSaleAd(id = this.toAdId())
+private fun String?.toAdLock() = this?.let { CarSaleAdLock(it) } ?: CarSaleAdLock.NONE
 private fun IRequest?.requestId() = this?.requestId?.let { CarSaleRequestId(it) } ?: CarSaleRequestId.NONE
 
 private fun AdDebug?.transportToWorkMode(): CarSaleWorkMode = when(this?.mode){
@@ -67,6 +68,15 @@ fun CarSaleContext.fromTransport(request: AdDeleteRequest){
     workMode = request.debug.transportToWorkMode()
     stubCase = request.debug.transportToStubCase()
 }
+private fun AdDeleteObject?.toInternal(): CarSaleAd = if (this != null) {
+    CarSaleAd(
+        id = id.toAdId(),
+        lock = lock.toAdLock(),
+    )
+} else {
+    CarSaleAd.NONE
+}
+
 
 fun CarSaleContext.fromTransport(request: AdSearchRequest){
     command = CarSaleCommand.SEARCH
@@ -99,7 +109,8 @@ private fun AdUpdateObject.toInternal(): CarSaleAd = CarSaleAd(
     yearOfProduction = this.yearOfProduction?.toInt() ?: 1977,
     milage = this.milage?.toInt()?:0,
     adStatus = this.adStatus.fromTransport(),
-    visibility = this.visibility.fromTransport()
+    visibility = this.visibility.fromTransport(),
+    lock = lock.toAdLock(),
 )
 
 private fun AdSearchFilter?.toInternal(): CarSaleAdFilter = CarSaleAdFilter(

@@ -1,6 +1,8 @@
 package helpers
 
 import CarSaleContext
+import exceptions.RepoConcurrencyException
+import models.CarSaleAdLock
 import models.CarSaleError
 import models.CarSaleState
 
@@ -34,4 +36,16 @@ fun errorValidation(
     group = "validation",
     message = "Validation error for field $field: $description",
     level = level,
+)
+
+fun errorRepoConcurrency(
+    expectedLock: CarSaleAdLock,
+    actualLock: CarSaleAdLock?,
+    exception: Exception? = null,
+) = CarSaleError(
+    field = "lock",
+    code = "concurrency",
+    group = "repo",
+    message = "The object has been changed concurrently by another user or process",
+    exception = exception ?: RepoConcurrencyException(expectedLock, actualLock),
 )

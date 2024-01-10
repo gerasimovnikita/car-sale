@@ -86,6 +86,7 @@ private fun CarSaleAd.toTransportAd(): AdResponseObject = AdResponseObject(
     ownerId = ownerId.takeIf { it != CarSaleUserId.NONE }?.asString(),
     visibility = visibility.toTransportAd(),
     permissions = permissionClient.toTransportAd(),
+    lock = lock.takeIf { it != CarSaleAdLock.NONE }?.asString()
 )
 
 private fun List<CarSaleError>.toTransportErrors(): List<Error>? = this

@@ -1,10 +1,7 @@
 package com.github.gerasimovnikita.otus.carsale.repo.tests
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import models.CarSaleAd
-import models.CarSaleAdId
-import models.CarSaleAdVisibility
-import models.CarSaleUserId
+import models.*
 import repo.DbAdRequest
 import repo.IAdRepository
 import kotlin.test.Test
@@ -15,6 +12,7 @@ import kotlin.test.assertNotEquals
 @OptIn(ExperimentalCoroutinesApi::class)
 abstract class RepoAdCreateTest {
     abstract val repo: IAdRepository
+    protected open val lockNew: CarSaleAdLock = CarSaleAdLock("20000000-0000-0000-0000-000000000002")
 
     private val createObj = CarSaleAd(
         carName = "create object",
@@ -32,6 +30,7 @@ abstract class RepoAdCreateTest {
         assertEquals(expected.description, result.data?.description)
         assertNotEquals(CarSaleAdId.NONE, result.data?.id)
         assertEquals(emptyList(), result.errors)
+        assertEquals(lockNew, result.data?.lock)
     }
 
     companion object : BaseInitAds("create") {

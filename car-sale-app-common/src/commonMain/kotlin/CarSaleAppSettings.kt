@@ -4,9 +4,10 @@ import CarSaleCorSettings
 import com.github.gerasimovnikita.otus.carsale.biz.CarSaleAdProcessor
 import com.github.gersimovnikita.otus.carsale.logging.common.CarSaleLoggerProvider
 
+
 data class CarSaleAppSettings(
     val appUrls: List<String> = emptyList(),
     val corSettings: CarSaleCorSettings = CarSaleCorSettings(),
-    val processor: CarSaleAdProcessor = CarSaleAdProcessor(),
+    val processor: CarSaleAdProcessor = CarSaleAdProcessor(corSettings),
     val logger: CarSaleLoggerProvider = CarSaleLoggerProvider()
 )

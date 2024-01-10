@@ -51,7 +51,7 @@ kotlin {
  * Настраиваем генерацию здесь
  */
 openApiGenerate {
-    val openapiGroup = "${project.group}.api.logs"
+    val openapiGroup = "com.github.gerasimovnikita.otus.carsale.api.log"
     generatorName.set("kotlin") // Это и есть активный генератор
     packageName.set(openapiGroup)
     apiPackage.set("$openapiGroup.api")

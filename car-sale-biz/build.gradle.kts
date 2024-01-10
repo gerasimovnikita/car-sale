@@ -16,6 +16,7 @@ kotlin {
                 implementation(project(":car-sale-common"))
                 implementation(project(":car-sale-stubs"))
                 implementation(project(":car-sale-lib-cor"))
+                implementation(project(":car-sale-lib-logging-common"))
             }
         }
         @Suppress("UNUSED_VARIABLE")

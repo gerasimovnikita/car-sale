@@ -14,7 +14,7 @@ import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
-class V1AdInmemoryApiTest {
+class RepoApiTest {
     private val createAd = AdCreateObject(
         carName = "Болт",
         description = "КРУТЕЙШИЙ",

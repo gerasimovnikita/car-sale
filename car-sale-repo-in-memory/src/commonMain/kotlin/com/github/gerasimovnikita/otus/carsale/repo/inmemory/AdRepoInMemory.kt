@@ -38,7 +38,7 @@ class AdRepoInMemory(
 
     override suspend fun createAd(rq: DbAdRequest): DbAdResponse {
         val key = randomUuid()
-        val ad = rq.ad.copy(id = CarSaleAdId(key))
+        val ad = rq.ad.copy(id = CarSaleAdId(key), lock = CarSaleAdLock(randomUuid()))
         val entity = AdEntity(ad)
         cache.put(key, entity)
         return DbAdResponse(

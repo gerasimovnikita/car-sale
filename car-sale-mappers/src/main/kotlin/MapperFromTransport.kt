@@ -64,7 +64,7 @@ fun CarSaleContext.fromTransport(request: AdUpdateRequest){
 fun CarSaleContext.fromTransport(request: AdDeleteRequest){
     command = CarSaleCommand.DELETE
     requestID = request.requestId()
-    carSaleRequest = request.ad?.id.toAdWithId()
+    carSaleRequest = request.ad.toInternal()
     workMode = request.debug.transportToWorkMode()
     stubCase = request.debug.transportToStubCase()
 }
@@ -104,6 +104,7 @@ private fun AdCreateObject.toInternal(): CarSaleAd = CarSaleAd(
 )
 
 private fun AdUpdateObject.toInternal(): CarSaleAd = CarSaleAd(
+    id = CarSaleAdId(this.id?: ""),
     carName = this.carName?:"",
     description = this.description?:"",
     yearOfProduction = this.yearOfProduction?.toInt() ?: 1977,

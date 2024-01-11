@@ -9,5 +9,5 @@ import models.CarSaleWorkMode
 fun ICorChainDsl<CarSaleContext>.stubs(title: String, block: ICorChainDsl<CarSaleContext>.() -> Unit) = chain {
     block()
     this.title = title
-    on {workMode == CarSaleWorkMode.STUB && state == CarSaleState.RUNNING}
+    on { workMode == CarSaleWorkMode.STUB && state == CarSaleState.RUNNING }
 }

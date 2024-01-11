@@ -18,7 +18,7 @@ data class CarSaleContext(
     var carSaleAdFilterValidating: CarSaleAdFilter = CarSaleAdFilter(),
     var carSaleAdFilterValidated: CarSaleAdFilter = CarSaleAdFilter(),
     var carSaleResponse: CarSaleAd = CarSaleAd(),
-    val carSaleAdsResponse: MutableList<CarSaleAd> = mutableListOf(),
+    var carSaleAdsResponse: MutableList<CarSaleAd> = mutableListOf(),
     var settings: CarSaleCorSettings = CarSaleCorSettings.NONE,
 
     var adRepo: IAdRepository = IAdRepository.NONE,

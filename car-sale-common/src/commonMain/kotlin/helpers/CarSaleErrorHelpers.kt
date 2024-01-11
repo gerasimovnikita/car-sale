@@ -49,3 +49,31 @@ fun errorRepoConcurrency(
     message = "The object has been changed concurrently by another user or process",
     exception = exception ?: RepoConcurrencyException(expectedLock, actualLock),
 )
+fun errorAdministration(
+    /**
+     * Код, характеризующий ошибку. Не должен включать имя поля или указание на валидацию.
+     * Например: empty, badSymbols, tooLong, etc
+     */
+    field: String = "",
+    violationCode: String,
+    description: String,
+    exception: Exception? = null,
+    level: CarSaleError.Level = CarSaleError.Level.ERROR,
+) = CarSaleError(
+    field = field,
+    code = "administration-$violationCode",
+    group = "administration",
+    message = "Microservice management error: $description",
+    level = level,
+    exception = exception,
+)
+
+val errorEmptyId = CarSaleError(
+    field = "id",
+    message = "Id must not be null or blank"
+)
+val errorNotFound = CarSaleError(
+    field = "id",
+    message = "Not Found",
+    code = "not-found"
+)

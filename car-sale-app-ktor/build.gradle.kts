@@ -60,6 +60,7 @@ dependencies {
     implementation(project(":car-sale-app-common"))
 
     implementation(project(":car-sale-repo-in-memory"))
+    implementation(project(":car-sale-repo-postgresql"))
     implementation(project(":car-sale-lib-logging-common"))
     implementation(project(":car-sale-lib-logging-kermit"))
     implementation(project(":car-sale-lib-logging-logback"))

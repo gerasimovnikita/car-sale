@@ -63,7 +63,7 @@ dependencies {
     implementation(project(":car-sale-repo-postgresql"))
     implementation(project(":car-sale-lib-logging-common"))
     implementation(project(":car-sale-lib-logging-kermit"))
-//    implementation(project(":car-sale-lib-logging-logback"))
+    implementation(project(":car-sale-lib-logging-logback"))
     implementation(project(":car-sale-repo-stubs"))
 
     testImplementation(kotlin("test-junit"))

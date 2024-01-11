@@ -1,6 +1,7 @@
-package com.github.gersimovnikita.otus.carsale.logging.jvm
+package com.github.gerasimovnikita.otus.carsale.logging.jvm
 
 import ch.qos.logback.classic.Logger
+import com.github.gerasimovnikita.otus.carsale.logging.jvm.DefaultMarker
 import com.github.gersimovnikita.otus.carsale.logging.common.IMpLogWrapper
 import com.github.gersimovnikita.otus.carsale.logging.common.LogLevel
 import net.logstash.logback.argument.StructuredArguments

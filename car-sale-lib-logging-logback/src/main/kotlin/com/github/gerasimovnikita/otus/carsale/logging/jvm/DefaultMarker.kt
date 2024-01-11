@@ -1,4 +1,4 @@
-package com.github.gersimovnikita.otus.carsale.logging.jvm
+package com.github.gerasimovnikita.otus.carsale.logging.jvm
 
 import org.slf4j.Marker
 

@@ -24,6 +24,8 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-junit"))
                 implementation(kotlin("test-annotations-common"))
+                implementation(project(":car-sale-repo-stubs"))
+                implementation(project(":car-sale-repo-tests"))
 
                 api("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
             }

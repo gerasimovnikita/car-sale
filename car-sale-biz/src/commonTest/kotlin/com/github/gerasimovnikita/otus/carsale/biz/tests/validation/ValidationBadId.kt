@@ -1,4 +1,4 @@
-package ru.otus.otuskotlin.marketplace.biz.validation
+package com.github.gerasimovnikita.otus.carsale.biz.tests.validation
 
 import CarSaleContext
 import com.github.gerasimovnikita.otus.carsale.biz.CarSaleAdProcessor
@@ -20,6 +20,7 @@ fun validationIdCorrect(command: CarSaleCommand, processor: CarSaleAdProcessor) 
             carName = "abc",
             description = "abc",
             visibility = CarSaleAdVisibility.VISIBLE_PUBLIC,
+            lock = CarSaleAdLock("123-234-abc-ABC")
         ),
     )
     processor.exec(ctx)
@@ -38,6 +39,7 @@ fun validationIdTrim(command: CarSaleCommand, processor: CarSaleAdProcessor) = r
             carName = "abc",
             description = "abc",
             visibility = CarSaleAdVisibility.VISIBLE_PUBLIC,
+            lock = CarSaleAdLock("123-234-abc-ABC")
         ),
     )
     processor.exec(ctx)
@@ -56,6 +58,7 @@ fun validationIdEmpty(command: CarSaleCommand, processor: CarSaleAdProcessor) = 
             carName = "abc",
             description = "abc",
             visibility = CarSaleAdVisibility.VISIBLE_PUBLIC,
+            lock = CarSaleAdLock("123-234-abc-ABC")
         ),
     )
     processor.exec(ctx)
@@ -77,6 +80,7 @@ fun validationIdFormat(command: CarSaleCommand, processor: CarSaleAdProcessor) =
             carName = "abc",
             description = "abc",
             visibility = CarSaleAdVisibility.VISIBLE_PUBLIC,
+            lock = CarSaleAdLock("123-234-abc-ABC")
         ),
     )
     processor.exec(ctx)

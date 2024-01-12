@@ -1,4 +1,4 @@
-package com.github.gerasimovnikita.otus.carsale.biz.stub.stub
+package com.github.gerasimovnikita.otus.carsale.biz.tests.stub
 
 import CarSaleContext
 import com.github.gerasimovnikita.otus.carsale.biz.CarSaleAdProcessor
@@ -8,43 +8,44 @@ import models.*
 import stubs.CarSaleStubs
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
+import kotlin.test.fail
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class AdReadStubTest {
+class AdSearchStubTest {
 
     private val processor = CarSaleAdProcessor()
-    val id = CarSaleAdId("666")
+    val filter = CarSaleAdFilter(searchString = "bolt")
 
     @Test
     fun read() = runTest {
 
         val ctx = CarSaleContext(
-            command = CarSaleCommand.READ,
+            command = CarSaleCommand.SEARCH,
             state = CarSaleState.NONE,
             workMode = CarSaleWorkMode.STUB,
             stubCase = CarSaleStubs.SUCCESS,
-            carSaleRequest = CarSaleAd(
-                id = id,
-            ),
+            carSaleAdFilterRequest = filter,
         )
         processor.exec(ctx)
+        assertTrue(ctx.carSaleAdsResponse.size > 1)
+        val first = ctx.carSaleAdsResponse.firstOrNull() ?: fail("Empty response list")
+        assertTrue(first.carName.contains(filter.searchString))
+        assertTrue(first.description.contains(filter.searchString))
         with (CarSaleAdStub.get()) {
-            assertEquals(id, ctx.carSaleResponse.id)
-            assertEquals(carName, ctx.carSaleResponse.carName)
-            assertEquals(description, ctx.carSaleResponse.description)
-            assertEquals(adStatus, ctx.carSaleResponse.adStatus)
-            assertEquals(visibility, ctx.carSaleResponse.visibility)
+            assertEquals(adStatus, first.adStatus)
+            assertEquals(visibility, first.visibility)
         }
     }
 
     @Test
     fun badId() = runTest {
         val ctx = CarSaleContext(
-            command = CarSaleCommand.READ,
+            command = CarSaleCommand.SEARCH,
             state = CarSaleState.NONE,
             workMode = CarSaleWorkMode.STUB,
             stubCase = CarSaleStubs.BAD_ID,
-            carSaleRequest = CarSaleAd(),
+            carSaleAdFilterRequest = filter,
         )
         processor.exec(ctx)
         assertEquals(CarSaleAd(), ctx.carSaleResponse)
@@ -55,13 +56,11 @@ class AdReadStubTest {
     @Test
     fun databaseError() = runTest {
         val ctx = CarSaleContext(
-            command = CarSaleCommand.READ,
+            command = CarSaleCommand.SEARCH,
             state = CarSaleState.NONE,
             workMode = CarSaleWorkMode.STUB,
             stubCase = CarSaleStubs.DB_ERROR,
-            carSaleRequest = CarSaleAd(
-                id = id,
-            ),
+            carSaleAdFilterRequest = filter,
         )
         processor.exec(ctx)
         assertEquals(CarSaleAd(), ctx.carSaleResponse)
@@ -71,13 +70,11 @@ class AdReadStubTest {
     @Test
     fun badNoCase() = runTest {
         val ctx = CarSaleContext(
-            command = CarSaleCommand.READ,
+            command = CarSaleCommand.SEARCH,
             state = CarSaleState.NONE,
             workMode = CarSaleWorkMode.STUB,
             stubCase = CarSaleStubs.BAD_CAR_NAME,
-            carSaleRequest = CarSaleAd(
-                id = id,
-            ),
+            carSaleAdFilterRequest = filter,
         )
         processor.exec(ctx)
         assertEquals(CarSaleAd(), ctx.carSaleResponse)

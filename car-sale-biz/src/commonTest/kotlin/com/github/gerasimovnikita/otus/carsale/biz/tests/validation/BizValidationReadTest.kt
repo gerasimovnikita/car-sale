@@ -1,15 +1,17 @@
-package ru.otus.otuskotlin.marketplace.biz.validation
+package com.github.gerasimovnikita.otus.carsale.biz.tests.validation
 
+import CarSaleCorSettings
 import com.github.gerasimovnikita.otus.carsale.biz.CarSaleAdProcessor
+import com.github.gerasimovnikita.otus.carsale.repository.inmemory.AdRepoStub
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import models.CarSaleCommand
 import kotlin.test.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class BizValidationOffersTest {
+class BizValidationReadTest {
 
-    private val command = CarSaleCommand.OFFERS
-    private val processor by lazy { CarSaleAdProcessor() }
+    private val command = CarSaleCommand.READ
+    private val processor  = CarSaleAdProcessor(CarSaleCorSettings(repoTest = AdRepoStub()))
 
     @Test fun correctId() = validationIdCorrect(command, processor)
     @Test fun trimId() = validationIdTrim(command, processor)

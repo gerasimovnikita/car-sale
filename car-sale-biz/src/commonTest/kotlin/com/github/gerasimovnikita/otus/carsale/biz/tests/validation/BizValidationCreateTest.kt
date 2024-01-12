@@ -1,15 +1,17 @@
-package ru.otus.otuskotlin.marketplace.biz.validation
+package com.github.gerasimovnikita.otus.carsale.biz.tests.validation
 
+import CarSaleCorSettings
 import com.github.gerasimovnikita.otus.carsale.biz.CarSaleAdProcessor
+import com.github.gerasimovnikita.otus.carsale.repository.inmemory.AdRepoStub
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import models.CarSaleCommand
 import kotlin.test.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class BizValidationUpdateTest {
+class BizValidationCreateTest {
 
-    private val command = CarSaleCommand.UPDATE
-    private val processor by lazy { CarSaleAdProcessor() }
+    private val command = CarSaleCommand.CREATE
+    private val processor  = CarSaleAdProcessor(CarSaleCorSettings(repoTest = AdRepoStub()))
 
     @Test fun correctTitle() = validationTitleCorrect(command, processor)
     @Test fun trimTitle() = validationTitleTrim(command, processor)
@@ -20,12 +22,6 @@ class BizValidationUpdateTest {
     @Test fun trimDescription() = validationDescriptionTrim(command, processor)
     @Test fun emptyDescription() = validationDescriptionEmpty(command, processor)
     @Test fun badSymbolsDescription() = validationDescriptionSymbols(command, processor)
-
-    @Test fun correctId() = validationIdCorrect(command, processor)
-    @Test fun trimId() = validationIdTrim(command, processor)
-    @Test fun emptyId() = validationIdEmpty(command, processor)
-    @Test fun badFormatId() = validationIdFormat(command, processor)
-
 
 }
 

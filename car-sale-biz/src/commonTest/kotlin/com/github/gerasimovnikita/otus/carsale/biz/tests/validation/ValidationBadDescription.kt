@@ -1,4 +1,4 @@
-package ru.otus.otuskotlin.marketplace.biz.validation
+package com.github.gerasimovnikita.otus.carsale.biz.tests.validation
 
 import CarSaleAdStub
 import CarSaleContext
@@ -23,6 +23,7 @@ fun validationDescriptionCorrect(command: CarSaleCommand, processor: CarSaleAdPr
             carName = "abc",
             description = "abc",
             visibility = CarSaleAdVisibility.VISIBLE_PUBLIC,
+            lock = CarSaleAdLock("123-234-abc-ABC")
         ),
     )
     processor.exec(ctx)
@@ -42,6 +43,7 @@ fun validationDescriptionTrim(command: CarSaleCommand, processor: CarSaleAdProce
             carName = "abc",
             description = " \n\tabc \n\t",
             visibility = CarSaleAdVisibility.VISIBLE_PUBLIC,
+            lock = CarSaleAdLock("123-234-abc-ABC")
         ),
     )
     processor.exec(ctx)
@@ -61,6 +63,7 @@ fun validationDescriptionEmpty(command: CarSaleCommand, processor: CarSaleAdProc
             carName = "abc",
             description = "",
             visibility = CarSaleAdVisibility.VISIBLE_PUBLIC,
+            lock = CarSaleAdLock("123-234-abc-ABC")
         ),
     )
     processor.exec(ctx)
@@ -82,6 +85,7 @@ fun validationDescriptionSymbols(command: CarSaleCommand, processor: CarSaleAdPr
             carName = "abc",
             description = "!@#$%^&*(),.{}",
             visibility = CarSaleAdVisibility.VISIBLE_PUBLIC,
+            lock = CarSaleAdLock("123-234-abc-ABC")
         ),
     )
     processor.exec(ctx)

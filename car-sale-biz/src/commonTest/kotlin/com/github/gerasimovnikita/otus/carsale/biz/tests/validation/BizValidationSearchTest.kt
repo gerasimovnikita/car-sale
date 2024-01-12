@@ -1,7 +1,9 @@
-package ru.otus.otuskotlin.marketplace.biz.validation
+package com.github.gerasimovnikita.otus.carsale.biz.tests.validation
 
 import CarSaleContext
+import CarSaleCorSettings
 import com.github.gerasimovnikita.otus.carsale.biz.CarSaleAdProcessor
+import com.github.gerasimovnikita.otus.carsale.repository.inmemory.AdRepoStub
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import models.CarSaleAdFilter
@@ -16,7 +18,7 @@ import kotlin.test.assertNotEquals
 class BizValidationSearchTest {
 
     private val command = CarSaleCommand.SEARCH
-    private val processor by lazy { CarSaleAdProcessor() }
+    private val processor  = CarSaleAdProcessor(CarSaleCorSettings(repoTest = AdRepoStub()))
 
     @Test
     fun correctEmpty() = runTest {

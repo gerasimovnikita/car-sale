@@ -6,5 +6,6 @@ import com.github.gerasimovnikita.otus.carsale.repo.tests.RepoAdCreateTest
 class AdRepoInMemoryCreateTest : RepoAdCreateTest() {
     override val repo = AdRepoInMemory(
         initObjects = initObjects,
+        randomUuid = { lockNew.asString() }
     )
 }

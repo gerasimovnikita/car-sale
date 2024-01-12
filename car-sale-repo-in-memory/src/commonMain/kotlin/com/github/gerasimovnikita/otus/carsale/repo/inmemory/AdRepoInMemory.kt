@@ -61,7 +61,7 @@ class AdRepoInMemory(
     override suspend fun updateAd(rq: DbAdRequest): DbAdResponse {
         val key = rq.ad.id.takeIf { it != CarSaleAdId.NONE }?.asString() ?: return resultErrorEmptyId
         val oldLock = rq.ad.lock.takeIf { it != CarSaleAdLock.NONE }?.asString() ?: return resultErrorEmptyLock
-        val newAd = rq.ad.copy()
+        val newAd = rq.ad.copy(lock = CarSaleAdLock(randomUuid()))
         val entity = AdEntity(newAd)
         return mutex.withLock {
             val oldAd = cache.get(key)

@@ -16,6 +16,7 @@ kotlin {
                 implementation(project(":car-sale-common"))
                 implementation(project(":car-sale-stubs"))
                 implementation(project(":car-sale-lib-cor"))
+                implementation(project(":car-sale-lib-logging-common"))
             }
         }
         @Suppress("UNUSED_VARIABLE")
@@ -23,6 +24,8 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-junit"))
                 implementation(kotlin("test-annotations-common"))
+                implementation(project(":car-sale-repo-stubs"))
+                implementation(project(":car-sale-repo-tests"))
 
                 api("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
             }

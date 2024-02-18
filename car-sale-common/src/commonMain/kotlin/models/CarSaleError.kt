@@ -7,8 +7,9 @@ data class CarSaleError(
     val message: String = "",
     val level: Level = Level.ERROR,
     val exception: Throwable? = null
-){
-    enum class Level{
+) {
+    enum class Level {
         ERROR, WARN, INFO
     }
+
 }

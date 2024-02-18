@@ -1,25 +1,25 @@
 package com.github.gerasimovnikita.otus.carsale.app.ktor.v1
 
-import com.github.gerasimovnikita.otus.carsale.biz.CarSaleAdProcessor
+import com.github.gersimovnikita.otus.carsale.app.common.CarSaleAppSettings
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
 
-fun Route.CarSaleAd(processor: CarSaleAdProcessor){
+fun Route.CarSaleAd(appSettings: CarSaleAppSettings){
     route("car-sale-ad"){
         post("create") {
-            call.createCarSaleAd(processor)
+            call.createCarSaleAd(appSettings)
         }
         post("read"){
-            call.readCarSaleAd(processor)
+            call.readCarSaleAd(appSettings)
         }
         post("update"){
-            call.updateCarSaleAd(processor)
+            call.updateCarSaleAd(appSettings)
         }
         post("delete"){
-            call.deleteCarSaleAd(processor)
+            call.deleteCarSaleAd(appSettings)
         }
         post("search"){
-            call.searchCarSaleAd(processor)
+            call.searchCarSaleAd(appSettings)
         }
     }
 }
